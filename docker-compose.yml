@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=hospital-system
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=12345678
+      - MAX_CONNECTIONS=300
