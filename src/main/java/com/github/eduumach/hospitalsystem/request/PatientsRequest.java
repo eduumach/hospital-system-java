@@ -1,15 +1,13 @@
-package com.github.eduumach.hospitalsystem.entity;
+package com.github.eduumach.hospitalsystem.request;
 
-import javax.persistence.*;
-import java.util.List;
+import ch.qos.logback.core.net.server.Client;
+import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 
-@Entity
-@Table(name = "patients")
-public class PatientsEntity {
+import java.util.Date;
 
-    @Id
+public class PatientsRequest {
+
     private String cpf;
-
     private String name;
     private Long age;
     private String rg;
@@ -33,13 +31,41 @@ public class PatientsEntity {
     private String bloodType;
     private String color;
 
-    @OneToMany(mappedBy = "patientsEntity")
-    private List<HeartRateEntity> heartRateEntityList;
+    public PatientsRequest() {
+    }
 
-    @OneToMany(mappedBy = "patientsEntity")
-    private List<PulmonaryIndexEntity> pulmonaryIndexEntityList;
+    public PatientsRequest(String cpf, String name, Long age, String rg, String dateOfBirth, String sex, String sign, String mother, String father, String email, String password, String zipCode, String address, Long number, String neighborhood, String city, String state, String landline, String phoneNumber, String height, Long weight, String bloodType, String color) {
+        this.cpf = cpf;
+        this.name = name;
+        this.age = age;
+        this.rg = rg;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.sign = sign;
+        this.mother = mother;
+        this.father = father;
+        this.email = email;
+        this.password = password;
+        this.zipCode = zipCode;
+        this.address = address;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
+        this.landline = landline;
+        this.phoneNumber = phoneNumber;
+        this.height = height;
+        this.weight = weight;
+        this.bloodType = bloodType;
+        this.color = color;
+    }
 
-    public PatientsEntity() {
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getName() {
@@ -56,14 +82,6 @@ public class PatientsEntity {
 
     public void setAge(Long age) {
         this.age = age;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getRg() {
@@ -226,19 +244,31 @@ public class PatientsEntity {
         this.color = color;
     }
 
-    public List<HeartRateEntity> getHeartRateEntityList() {
-        return heartRateEntityList;
-    }
-
-    public void setHeartRateEntityList(List<HeartRateEntity> heartRateEntityList) {
-        this.heartRateEntityList = heartRateEntityList;
-    }
-
-    public List<PulmonaryIndexEntity> getPulmonaryIndexEntityList() {
-        return pulmonaryIndexEntityList;
-    }
-
-    public void setPulmonaryIndexEntityList(List<PulmonaryIndexEntity> pulmonaryIndexEntityList) {
-        this.pulmonaryIndexEntityList = pulmonaryIndexEntityList;
+    public PatientsEntity requestObject(){
+        PatientsEntity patientsEntity = new PatientsEntity();
+        patientsEntity.setCpf(this.cpf);
+        patientsEntity.setName(this.name);
+        patientsEntity.setAge(this.age);
+        patientsEntity.setRg(this.rg);
+        patientsEntity.setDateOfBirth(this.dateOfBirth);
+        patientsEntity.setSex(this.sex);
+        patientsEntity.setSign(this.sign);
+        patientsEntity.setMother(this.mother);
+        patientsEntity.setFather(this.father);
+        patientsEntity.setEmail(this.email);
+        patientsEntity.setPassword(this.password);
+        patientsEntity.setZipCode(this.zipCode);
+        patientsEntity.setAddress(this.address);
+        patientsEntity.setNumber(this.number);
+        patientsEntity.setNeighborhood(this.neighborhood);
+        patientsEntity.setCity(this.city);
+        patientsEntity.setState(this.state);
+        patientsEntity.setLandline(this.landline);
+        patientsEntity.setPhoneNumber(this.phoneNumber);
+        patientsEntity.setHeight(this.height);
+        patientsEntity.setWeight(this.weight);
+        patientsEntity.setBloodType(this.bloodType);
+        patientsEntity.setColor(this.color);
+        return patientsEntity;
     }
 }

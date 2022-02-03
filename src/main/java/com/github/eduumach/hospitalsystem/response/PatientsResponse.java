@@ -1,15 +1,15 @@
-package com.github.eduumach.hospitalsystem.entity;
+package com.github.eduumach.hospitalsystem.response;
 
-import javax.persistence.*;
+
+import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
+import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
+import com.github.eduumach.hospitalsystem.entity.PulmonaryIndexEntity;
+
 import java.util.List;
 
-@Entity
-@Table(name = "patients")
-public class PatientsEntity {
+public class PatientsResponse {
 
-    @Id
     private String cpf;
-
     private String name;
     private Long age;
     private String rg;
@@ -32,14 +32,50 @@ public class PatientsEntity {
     private Long weight;
     private String bloodType;
     private String color;
-
-    @OneToMany(mappedBy = "patientsEntity")
     private List<HeartRateEntity> heartRateEntityList;
-
-    @OneToMany(mappedBy = "patientsEntity")
     private List<PulmonaryIndexEntity> pulmonaryIndexEntityList;
 
-    public PatientsEntity() {
+    public PatientsResponse() {
+    }
+
+    public PatientsResponse(String cpf, String name, Long age, String rg, String dateOfBirth, String sex,
+                            String sign, String mother, String father, String email, String password, String zipCode,
+                            String address, Long number, String neighborhood, String city, String state, String landline,
+                            String phoneNumber, String height, Long weight, String bloodType, String color, List<HeartRateEntity> heartRateEntityList, List<PulmonaryIndexEntity> pulmonaryIndexEntityList) {
+
+        this.cpf = cpf;
+        this.name = name;
+        this.age = age;
+        this.rg = rg;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.sign = sign;
+        this.mother = mother;
+        this.father = father;
+        this.email = email;
+        this.password = password;
+        this.zipCode = zipCode;
+        this.address = address;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
+        this.landline = landline;
+        this.phoneNumber = phoneNumber;
+        this.height = height;
+        this.weight = weight;
+        this.bloodType = bloodType;
+        this.color = color;
+        this.heartRateEntityList = heartRateEntityList;
+        this.pulmonaryIndexEntityList = pulmonaryIndexEntityList;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getName() {
@@ -56,14 +92,6 @@ public class PatientsEntity {
 
     public void setAge(Long age) {
         this.age = age;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getRg() {
@@ -240,5 +268,34 @@ public class PatientsEntity {
 
     public void setPulmonaryIndexEntityList(List<PulmonaryIndexEntity> pulmonaryIndexEntityList) {
         this.pulmonaryIndexEntityList = pulmonaryIndexEntityList;
+    }
+
+    public void createResponse(PatientsEntity patientsEntity){
+        this.cpf = patientsEntity.getCpf();
+        this.name = patientsEntity.getName();
+        this.age = patientsEntity.getAge();
+        this.rg = patientsEntity.getRg();
+        this.dateOfBirth = patientsEntity.getDateOfBirth();
+        this.sex = patientsEntity.getSex();
+        this.sign = patientsEntity.getSign();
+        this.mother = patientsEntity.getMother();
+        this.father = patientsEntity.getFather();
+        this.email = patientsEntity.getEmail();
+        this.password = patientsEntity.getPassword();
+        this.zipCode = patientsEntity.getZipCode();
+        this.address = patientsEntity.getAddress();
+        this.number = patientsEntity.getNumber();
+        this.neighborhood = patientsEntity.getNeighborhood();
+        this.city = patientsEntity.getCity();
+        this.state = patientsEntity.getState();
+        this.landline = patientsEntity.getLandline();
+        this.phoneNumber = patientsEntity.getPhoneNumber();
+        this.height = patientsEntity.getHeight();
+        this.weight = patientsEntity.getWeight();
+        this.bloodType = patientsEntity.getBloodType();
+        this.color = patientsEntity.getColor();
+
+        this.heartRateEntityList = patientsEntity.getHeartRateEntityList();
+        this.pulmonaryIndexEntityList = patientsEntity.getPulmonaryIndexEntityList();
     }
 }
