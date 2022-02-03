@@ -1,7 +1,7 @@
 package com.github.eduumach.hospitalsystem.repository;
 
-import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
+import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface HeartRateRepository extends JpaRepository<PatientsEntity, String> {
+public interface HeartRateRepository extends JpaRepository<HeartRateEntity, String> {
 }
