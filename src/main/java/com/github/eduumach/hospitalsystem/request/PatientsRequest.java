@@ -1,15 +1,12 @@
 package com.github.eduumach.hospitalsystem.request;
 
-import ch.qos.logback.core.net.server.Client;
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
-
-import java.util.Date;
 
 public class PatientsRequest {
 
-    private String cpf;
     private String name;
     private Long age;
+    private String cpf;
     private String rg;
     private String dateOfBirth;
     private String sex;

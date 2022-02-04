@@ -8,10 +8,12 @@ import java.util.List;
 public class PatientsEntity {
 
     @Id
-    private String cpf;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
     private Long age;
+    private String cpf;
     private String rg;
     private String dateOfBirth;
     private String sex;
@@ -40,6 +42,14 @@ public class PatientsEntity {
     private List<PulmonaryIndexEntity> pulmonaryIndexEntityList;
 
     public PatientsEntity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

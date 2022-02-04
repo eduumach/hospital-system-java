@@ -8,10 +8,10 @@ public class PulmonaryIndexEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
+    private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "patient_cpf")
+    @JoinColumn(name = "patient_id")
     private PatientsEntity patientsEntity;
 
     private int epoc;

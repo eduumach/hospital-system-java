@@ -15,7 +15,7 @@ public class PatientsService {
 
     public PatientsResponse createPatient(PatientsRequest patientsRequest){
 
-        if(patientsRepository.findById(patientsRequest.getCpf()).isPresent()){
+        if(patientsRepository.existsByCpf(patientsRequest.getCpf())){
             throw new RuntimeException("cpf already exists");
         }
 

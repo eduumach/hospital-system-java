@@ -9,9 +9,10 @@ import java.util.List;
 
 public class PatientsResponse {
 
-    private String cpf;
+    private Long id;
     private String name;
     private Long age;
+    private String cpf;
     private String rg;
     private String dateOfBirth;
     private String sex;
@@ -38,14 +39,11 @@ public class PatientsResponse {
     public PatientsResponse() {
     }
 
-    public PatientsResponse(String cpf, String name, Long age, String rg, String dateOfBirth, String sex,
-                            String sign, String mother, String father, String email, String password, String zipCode,
-                            String address, Long number, String neighborhood, String city, String state, String landline,
-                            String phoneNumber, String height, Long weight, String bloodType, String color, List<HeartRateEntity> heartRateEntityList, List<PulmonaryIndexEntity> pulmonaryIndexEntityList) {
-
-        this.cpf = cpf;
+    public PatientsResponse(Long id, String name, Long age, String cpf, String rg, String dateOfBirth, String sex, String sign, String mother, String father, String email, String password, String zipCode, String address, Long number, String neighborhood, String city, String state, String landline, String phoneNumber, String height, Long weight, String bloodType, String color, List<HeartRateEntity> heartRateEntityList, List<PulmonaryIndexEntity> pulmonaryIndexEntityList) {
+        this.id = id;
         this.name = name;
         this.age = age;
+        this.cpf = cpf;
         this.rg = rg;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
@@ -68,6 +66,14 @@ public class PatientsResponse {
         this.color = color;
         this.heartRateEntityList = heartRateEntityList;
         this.pulmonaryIndexEntityList = pulmonaryIndexEntityList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCpf() {
@@ -271,6 +277,7 @@ public class PatientsResponse {
     }
 
     public void createResponse(PatientsEntity patientsEntity){
+        this.id = patientsEntity.getId();
         this.cpf = patientsEntity.getCpf();
         this.name = patientsEntity.getName();
         this.age = patientsEntity.getAge();

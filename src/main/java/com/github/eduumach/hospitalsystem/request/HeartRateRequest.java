@@ -1,34 +1,22 @@
-package com.github.eduumach.hospitalsystem.response;
+package com.github.eduumach.hospitalsystem.request;
 
 import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
-public class HeartRateResponse {
+public class HeartRateRequest {
 
-    private Long id;
     private String cpf;
     private int epoc;
     private double haeartRate;
 
-    public HeartRateResponse() {
+    public HeartRateRequest() {
     }
 
-    public HeartRateResponse(Long id, String cpf, int epoc, double haeartRate) {
-        this.id = id;
+    public HeartRateRequest(String cpf, int epoc, double haeartRate) {
         this.cpf = cpf;
         this.epoc = epoc;
         this.haeartRate = haeartRate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getCpf() {
@@ -55,10 +43,11 @@ public class HeartRateResponse {
         this.haeartRate = haeartRate;
     }
 
-    public void createResponse(HeartRateEntity heartRateEntity){
-        this.id = heartRateEntity.getId();
-        this.cpf = heartRateEntity.getPatientsEntity().getCpf();
-        this.epoc = heartRateEntity.getEpoc();
-        this.haeartRate = heartRateEntity.getHaeartRate();
+    public HeartRateEntity requestObject(){
+        HeartRateEntity heartRateEntity = new HeartRateEntity();
+        heartRateEntity.setEpoc(this.epoc);
+        heartRateEntity.setHaeartRate(this.haeartRate);
+
+        return heartRateEntity;
     }
 }

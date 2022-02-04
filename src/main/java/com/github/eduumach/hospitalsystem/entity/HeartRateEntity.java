@@ -8,14 +8,14 @@ public class HeartRateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
+    private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "patient_cpf")
+    @JoinColumn(name = "patient_id")
     private PatientsEntity patientsEntity;
 
     private int epoc;
-    private int haeartRate;
+    private double haeartRate;
 
     public HeartRateEntity() {
     }
@@ -44,11 +44,11 @@ public class HeartRateEntity {
         this.epoc = epoc;
     }
 
-    public int getHaeartRate() {
+    public double getHaeartRate() {
         return haeartRate;
     }
 
-    public void setHaeartRate(int haeartRate) {
+    public void setHaeartRate(double haeartRate) {
         this.haeartRate = haeartRate;
     }
 }
