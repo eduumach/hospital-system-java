@@ -1,9 +1,11 @@
 package com.github.eduumach.hospitalsystem.request;
 
+import com.github.eduumach.hospitalsystem.entity.PulmonaryIndexEntity;
+
 public class PulmonaryIndexRequest {
 
     private String cpf;
-    private int epoc;
+    private int epoch;
     private double pulmonaryIndex;
 
     public PulmonaryIndexRequest() {
@@ -11,7 +13,7 @@ public class PulmonaryIndexRequest {
 
     public PulmonaryIndexRequest(String cpf, int epoc, double pulmonaryIndex) {
         this.cpf = cpf;
-        this.epoc = epoc;
+        this.epoch = epoc;
         this.pulmonaryIndex = pulmonaryIndex;
     }
 
@@ -23,12 +25,12 @@ public class PulmonaryIndexRequest {
         this.cpf = cpf;
     }
 
-    public int getEpoc() {
-        return epoc;
+    public int getEpoch() {
+        return epoch;
     }
 
-    public void setEpoc(int epoc) {
-        this.epoc = epoc;
+    public void setEpoch(int epoch) {
+        this.epoch = epoch;
     }
 
     public double getPulmonaryIndex() {
@@ -37,5 +39,13 @@ public class PulmonaryIndexRequest {
 
     public void setPulmonaryIndex(double pulmonaryIndex) {
         this.pulmonaryIndex = pulmonaryIndex;
+    }
+
+    public PulmonaryIndexEntity requestObject(){
+        PulmonaryIndexEntity pulmonaryIndexEntity = new PulmonaryIndexEntity();
+        pulmonaryIndexEntity.setEpoch(this.epoch);
+        pulmonaryIndexEntity.setPulmonaryIndex(this.pulmonaryIndex);
+
+        return pulmonaryIndexEntity;
     }
 }

@@ -14,8 +14,8 @@ public class PulmonaryIndexEntity {
     @JoinColumn(name = "patient_id")
     private PatientsEntity patientsEntity;
 
-    private int epoc;
-    private int pulmonaryIndex;
+    private int epoch;
+    private double pulmonaryIndex;
 
     public PulmonaryIndexEntity() {
     }
@@ -36,19 +36,19 @@ public class PulmonaryIndexEntity {
         this.patientsEntity = patientsEntity;
     }
 
-    public int getEpoc() {
-        return epoc;
+    public int getEpoch() {
+        return epoch;
     }
 
-    public void setEpoc(int epoc) {
-        this.epoc = epoc;
+    public void setEpoch(int epoch) {
+        this.epoch = epoch;
     }
 
-    public int getPulmonaryIndex() {
+    public double getPulmonaryIndex() {
         return pulmonaryIndex;
     }
 
-    public void setPulmonaryIndex(int pulmonaryIndex) {
+    public void setPulmonaryIndex(double pulmonaryIndex) {
         this.pulmonaryIndex = pulmonaryIndex;
     }
 }
