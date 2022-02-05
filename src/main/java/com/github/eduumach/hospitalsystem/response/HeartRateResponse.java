@@ -1,10 +1,6 @@
 package com.github.eduumach.hospitalsystem.response;
 
 import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
-import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 public class HeartRateResponse {
 
@@ -58,7 +54,7 @@ public class HeartRateResponse {
     public void createResponse(HeartRateEntity heartRateEntity){
         this.id = heartRateEntity.getId();
         this.cpf = heartRateEntity.getPatientsEntity().getCpf();
-        this.epoc = heartRateEntity.getEpoc();
-        this.haeartRate = heartRateEntity.getHaeartRate();
+        this.epoc = heartRateEntity.getEpoch();
+        this.haeartRate = heartRateEntity.getHeartRate();
     }
 }

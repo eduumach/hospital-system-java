@@ -14,8 +14,8 @@ public class HeartRateEntity {
     @JoinColumn(name = "patient_id")
     private PatientsEntity patientsEntity;
 
-    private int epoc;
-    private double haeartRate;
+    private int epoch;
+    private double heartRate;
 
     public HeartRateEntity() {
     }
@@ -36,19 +36,19 @@ public class HeartRateEntity {
         this.patientsEntity = patientsEntity;
     }
 
-    public int getEpoc() {
-        return epoc;
+    public int getEpoch() {
+        return epoch;
     }
 
-    public void setEpoc(int epoc) {
-        this.epoc = epoc;
+    public void setEpoch(int epoch) {
+        this.epoch = epoch;
     }
 
-    public double getHaeartRate() {
-        return haeartRate;
+    public double getHeartRate() {
+        return heartRate;
     }
 
-    public void setHaeartRate(double haeartRate) {
-        this.haeartRate = haeartRate;
+    public void setHeartRate(double heartRate) {
+        this.heartRate = heartRate;
     }
 }

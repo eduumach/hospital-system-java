@@ -1,20 +1,23 @@
 package com.github.eduumach.hospitalsystem.response;
 
+import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
+import com.github.eduumach.hospitalsystem.entity.PulmonaryIndexEntity;
 
 public class PulmonaryIndexResponse {
 
     private Long id;
-    private PatientsEntity patientsEntity;
+    private String cpf;
     private int epoc;
     private double pulmonaryIndex;
 
     public PulmonaryIndexResponse() {
     }
 
-    public PulmonaryIndexResponse(Long id, PatientsEntity patientsEntity, int epoc, double pulmonaryIndex) {
+
+    public PulmonaryIndexResponse(Long id, String cpf, int epoc, double pulmonaryIndex) {
         this.id = id;
-        this.patientsEntity = patientsEntity;
+        this.cpf = cpf;
         this.epoc = epoc;
         this.pulmonaryIndex = pulmonaryIndex;
     }
@@ -27,12 +30,12 @@ public class PulmonaryIndexResponse {
         this.id = id;
     }
 
-    public PatientsEntity getPatientsEntity() {
-        return patientsEntity;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setPatientsEntity(PatientsEntity patientsEntity) {
-        this.patientsEntity = patientsEntity;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public int getEpoc() {
@@ -49,5 +52,12 @@ public class PulmonaryIndexResponse {
 
     public void setPulmonaryIndex(double pulmonaryIndex) {
         this.pulmonaryIndex = pulmonaryIndex;
+    }
+
+    public void createResponse(PulmonaryIndexEntity pulmonaryIndexEntity){
+        this.id = pulmonaryIndexEntity.getId();
+        this.cpf = pulmonaryIndexEntity.getPatientsEntity().getCpf();
+        this.epoc = pulmonaryIndexEntity.getEpoc();
+        this.pulmonaryIndex = pulmonaryIndexEntity.getPulmonaryIndex();
     }
 }

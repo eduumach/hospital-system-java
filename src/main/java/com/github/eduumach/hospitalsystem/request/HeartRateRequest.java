@@ -1,22 +1,21 @@
 package com.github.eduumach.hospitalsystem.request;
 
 import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
-import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 
 
 public class HeartRateRequest {
 
     private String cpf;
-    private int epoc;
-    private double haeartRate;
+    private int epoch;
+    private double heartRate;
 
     public HeartRateRequest() {
     }
 
-    public HeartRateRequest(String cpf, int epoc, double haeartRate) {
+    public HeartRateRequest(String cpf, int epoch, double haeartRate) {
         this.cpf = cpf;
-        this.epoc = epoc;
-        this.haeartRate = haeartRate;
+        this.epoch = epoch;
+        this.heartRate = haeartRate;
     }
 
     public String getCpf() {
@@ -27,26 +26,26 @@ public class HeartRateRequest {
         this.cpf = cpf;
     }
 
-    public int getEpoc() {
-        return epoc;
+    public int getEpoch() {
+        return epoch;
     }
 
-    public void setEpoc(int epoc) {
-        this.epoc = epoc;
+    public void setEpoch(int epoch) {
+        this.epoch = epoch;
     }
 
-    public double getHaeartRate() {
-        return haeartRate;
+    public double getHeartRate() {
+        return heartRate;
     }
 
-    public void setHaeartRate(double haeartRate) {
-        this.haeartRate = haeartRate;
+    public void setHeartRate(double heartRate) {
+        this.heartRate = heartRate;
     }
 
     public HeartRateEntity requestObject(){
         HeartRateEntity heartRateEntity = new HeartRateEntity();
-        heartRateEntity.setEpoc(this.epoc);
-        heartRateEntity.setHaeartRate(this.haeartRate);
+        heartRateEntity.setEpoch(this.epoch);
+        heartRateEntity.setHeartRate(this.heartRate);
 
         return heartRateEntity;
     }
