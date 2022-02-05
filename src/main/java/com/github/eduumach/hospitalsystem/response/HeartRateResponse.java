@@ -6,8 +6,8 @@ public class HeartRateResponse {
 
     private Long id;
     private String cpf;
-    private int epoc;
-    private double haeartRate;
+    private int epoch;
+    private double heartRate;
 
     public HeartRateResponse() {
     }
@@ -15,8 +15,8 @@ public class HeartRateResponse {
     public HeartRateResponse(Long id, String cpf, int epoc, double haeartRate) {
         this.id = id;
         this.cpf = cpf;
-        this.epoc = epoc;
-        this.haeartRate = haeartRate;
+        this.epoch = epoc;
+        this.heartRate = haeartRate;
     }
 
     public Long getId() {
@@ -35,26 +35,26 @@ public class HeartRateResponse {
         this.cpf = cpf;
     }
 
-    public int getEpoc() {
-        return epoc;
+    public int getEpoch() {
+        return epoch;
     }
 
-    public void setEpoc(int epoc) {
-        this.epoc = epoc;
+    public void setEpoch(int epoch) {
+        this.epoch = epoch;
     }
 
-    public double getHaeartRate() {
-        return haeartRate;
+    public double getHeartRate() {
+        return heartRate;
     }
 
-    public void setHaeartRate(double haeartRate) {
-        this.haeartRate = haeartRate;
+    public void setHeartRate(double heartRate) {
+        this.heartRate = heartRate;
     }
 
     public void createResponse(HeartRateEntity heartRateEntity){
         this.id = heartRateEntity.getId();
         this.cpf = heartRateEntity.getPatientsEntity().getCpf();
-        this.epoc = heartRateEntity.getEpoch();
-        this.haeartRate = heartRateEntity.getHeartRate();
+        this.epoch = heartRateEntity.getEpoch();
+        this.heartRate = heartRateEntity.getHeartRate();
     }
 }

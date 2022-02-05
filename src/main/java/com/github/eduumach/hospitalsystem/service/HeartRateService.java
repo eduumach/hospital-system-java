@@ -20,7 +20,7 @@ public class HeartRateService {
     public HeartRateResponse createHeartRate(HeartRateRequest heartRateRequest){
 
         if(!patientsRepository.existsByCpf(heartRateRequest.getCpf())){
-            throw new RuntimeException("cpf do note exists");
+            throw new RuntimeException("cpf do not exists");
         }
 
         HeartRateEntity heartRateEntity = heartRateRequest.requestObject();
