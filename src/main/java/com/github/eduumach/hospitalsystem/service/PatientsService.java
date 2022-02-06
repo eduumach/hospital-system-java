@@ -7,6 +7,9 @@ import com.github.eduumach.hospitalsystem.response.PatientsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PatientsService {
 
@@ -26,6 +29,10 @@ public class PatientsService {
         PatientsResponse patientsResponse = new PatientsResponse();
         patientsResponse.createResponse(patientsEntity);
         return patientsResponse;
+    }
+
+    public List getPatients(){
+        return patientsRepository.findAll();
     }
 
 }
