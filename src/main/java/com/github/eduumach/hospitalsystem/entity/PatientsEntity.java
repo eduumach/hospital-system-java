@@ -1,5 +1,7 @@
 package com.github.eduumach.hospitalsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -35,9 +37,11 @@ public class PatientsEntity {
     private String bloodType;
     private String color;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "patientsEntity")
     private List<HeartRateEntity> heartRateEntityList;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "patientsEntity")
     private List<PulmonaryIndexEntity> pulmonaryIndexEntityList;
 

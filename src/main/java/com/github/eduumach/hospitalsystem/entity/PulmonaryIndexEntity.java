@@ -1,5 +1,7 @@
 package com.github.eduumach.hospitalsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,8 +12,9 @@ public class PulmonaryIndexEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonBackReference
     @ManyToOne()
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_id", nullable = false)
     private PatientsEntity patientsEntity;
 
     private int epoch;
