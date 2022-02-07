@@ -1,9 +1,19 @@
 package com.github.eduumach.hospitalsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "heartRate")
 public class HeartRateEntity {
@@ -20,38 +30,4 @@ public class HeartRateEntity {
     private int epoch;
     private double heartRate;
 
-    public HeartRateEntity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public PatientsEntity getPatientsEntity() {
-        return patientsEntity;
-    }
-
-    public void setPatientsEntity(PatientsEntity patientsEntity) {
-        this.patientsEntity = patientsEntity;
-    }
-
-    public int getEpoch() {
-        return epoch;
-    }
-
-    public void setEpoch(int epoch) {
-        this.epoch = epoch;
-    }
-
-    public double getHeartRate() {
-        return heartRate;
-    }
-
-    public void setHeartRate(double heartRate) {
-        this.heartRate = heartRate;
-    }
 }
