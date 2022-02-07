@@ -1,7 +1,7 @@
 package com.github.eduumach.hospitalsystem.controller;
 
-import com.github.eduumach.hospitalsystem.request.PulmonaryIndexRequest;
-import com.github.eduumach.hospitalsystem.response.PulmonaryIndexResponse;
+import com.github.eduumach.hospitalsystem.dto.request.PulmonaryIndexRequest;
+import com.github.eduumach.hospitalsystem.dto.response.PulmonaryIndexResponse;
 import com.github.eduumach.hospitalsystem.service.PulmonaryIndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

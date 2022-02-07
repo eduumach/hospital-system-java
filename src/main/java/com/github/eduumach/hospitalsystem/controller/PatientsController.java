@@ -1,7 +1,7 @@
 package com.github.eduumach.hospitalsystem.controller;
 
-import com.github.eduumach.hospitalsystem.request.PatientsRequest;
-import com.github.eduumach.hospitalsystem.response.PatientsResponse;
+import com.github.eduumach.hospitalsystem.dto.request.PatientsRequest;
+import com.github.eduumach.hospitalsystem.dto.response.PatientsResponse;
 import com.github.eduumach.hospitalsystem.service.PatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

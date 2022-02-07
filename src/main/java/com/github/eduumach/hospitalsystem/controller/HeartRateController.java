@@ -1,7 +1,7 @@
 package com.github.eduumach.hospitalsystem.controller;
 
-import com.github.eduumach.hospitalsystem.request.HeartRateRequest;
-import com.github.eduumach.hospitalsystem.response.HeartRateResponse;
+import com.github.eduumach.hospitalsystem.dto.request.HeartRateRequest;
+import com.github.eduumach.hospitalsystem.dto.response.HeartRateResponse;
 import com.github.eduumach.hospitalsystem.service.HeartRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

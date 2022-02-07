@@ -2,12 +2,11 @@ package com.github.eduumach.hospitalsystem.service;
 
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 import com.github.eduumach.hospitalsystem.repository.PatientsRepository;
-import com.github.eduumach.hospitalsystem.request.PatientsRequest;
-import com.github.eduumach.hospitalsystem.response.PatientsResponse;
+import com.github.eduumach.hospitalsystem.dto.request.PatientsRequest;
+import com.github.eduumach.hospitalsystem.dto.response.PatientsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

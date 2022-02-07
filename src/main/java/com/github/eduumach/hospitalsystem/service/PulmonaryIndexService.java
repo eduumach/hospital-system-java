@@ -3,8 +3,8 @@ package com.github.eduumach.hospitalsystem.service;
 import com.github.eduumach.hospitalsystem.entity.PulmonaryIndexEntity;
 import com.github.eduumach.hospitalsystem.repository.PatientsRepository;
 import com.github.eduumach.hospitalsystem.repository.PulmonaryIndexRepository;
-import com.github.eduumach.hospitalsystem.request.PulmonaryIndexRequest;
-import com.github.eduumach.hospitalsystem.response.PulmonaryIndexResponse;
+import com.github.eduumach.hospitalsystem.dto.request.PulmonaryIndexRequest;
+import com.github.eduumach.hospitalsystem.dto.response.PulmonaryIndexResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

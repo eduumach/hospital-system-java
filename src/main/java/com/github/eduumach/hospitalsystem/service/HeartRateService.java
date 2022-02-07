@@ -3,8 +3,8 @@ package com.github.eduumach.hospitalsystem.service;
 import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
 import com.github.eduumach.hospitalsystem.repository.HeartRateRepository;
 import com.github.eduumach.hospitalsystem.repository.PatientsRepository;
-import com.github.eduumach.hospitalsystem.request.HeartRateRequest;
-import com.github.eduumach.hospitalsystem.response.HeartRateResponse;
+import com.github.eduumach.hospitalsystem.dto.request.HeartRateRequest;
+import com.github.eduumach.hospitalsystem.dto.response.HeartRateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
