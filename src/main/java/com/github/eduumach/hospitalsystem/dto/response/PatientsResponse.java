@@ -9,8 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
-//tirar dados em exesso
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,8 +40,6 @@ public class PatientsResponse {
     private Long weight;
     private String bloodType;
     private String color;
-    private List<HeartRateEntity> heartRateEntityList;
-    private List<PulmonaryIndexEntity> pulmonaryIndexEntityList;
 
     public void createResponse(PatientsEntity patientsEntity){
         this.id = patientsEntity.getId();
@@ -68,8 +66,5 @@ public class PatientsResponse {
         this.weight = patientsEntity.getWeight();
         this.bloodType = patientsEntity.getBloodType();
         this.color = patientsEntity.getColor();
-
-        this.heartRateEntityList = patientsEntity.getHeart_rates();
-        this.pulmonaryIndexEntityList = patientsEntity.getPulmonary_index();
     }
 }
