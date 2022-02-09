@@ -1,16 +1,15 @@
 package com.github.eduumach.hospitalsystem.service;
 
-import com.github.eduumach.hospitalsystem.dto.response.ImportantPatientsDataResponse;
+import com.github.eduumach.hospitalsystem.dto.response.patients.PatientsResponse;
+import com.github.eduumach.hospitalsystem.dto.response.patients.*;
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 import com.github.eduumach.hospitalsystem.repository.PatientsRepository;
 import com.github.eduumach.hospitalsystem.dto.request.PatientsRequest;
-import com.github.eduumach.hospitalsystem.dto.response.PatientsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -57,22 +56,9 @@ public class PatientsService {
         if(!patientsEntityOptional.isPresent()){
             throw new RuntimeException("patient does not exist");
         }
-        PatientsEntity patientsEntitiRequest = patientsRequest.requestObject();
-        PatientsEntity patientsEntity = patientsEntityOptional.get();
 
-        patientsEntity.setName(patientsEntitiRequest.getName()).setAge(patientsEntitiRequest.getAge())
-                .setCpf(patientsEntitiRequest.getCpf()).setRg(patientsEntitiRequest.getRg())
-                .setDateOfBirth(patientsEntitiRequest.getDateOfBirth()).setSex(patientsEntitiRequest.getSex())
-                .setSign(patientsEntitiRequest.getSign()).setMother(patientsEntitiRequest.getMother())
-                .setFather(patientsEntitiRequest.getFather()).setEmail(patientsEntitiRequest.getEmail())
-                .setPassword(patientsEntitiRequest.getPassword()).setZipCode(patientsEntitiRequest.getZipCode())
-                .setAddress(patientsEntitiRequest.getAddress()).setNumber(patientsEntitiRequest.getNumber())
-                .setNeighborhood(patientsEntitiRequest.getNeighborhood()).setCity(patientsEntitiRequest.getCity())
-                .setState(patientsEntitiRequest.getState()).setLandline(patientsEntitiRequest.getLandline())
-                .setPhoneNumber(patientsEntitiRequest.getPhoneNumber()).setHeight(patientsEntitiRequest.getHeight())
-                .setWeight(patientsEntitiRequest.getWeight()).setBloodType(patientsEntitiRequest.getBloodType())
-                .setColor(patientsEntitiRequest.getColor());
-
+        PatientsEntity patientsEntity = patientsRequest.requestObject();
+        patientsEntity.setId(id);
         patientsEntity = patientsRepository.save(patientsEntity);
 
         PatientsResponse patientsResponse = new PatientsResponse();
@@ -120,4 +106,30 @@ public class PatientsService {
         return patientsResponse;
     }
 
+    public HeartPatientExams heartPatientExams(Long id){
+        Optional<PatientsEntity> patientsEntityOptional = patientsRepository.findById(id);
+        if(patientsEntityOptional.isEmpty()){
+            throw new RuntimeException("patient does not exist");
+        }
+
+        return new HeartPatientExams(patientsEntityOptional.get());
+    }
+
+    public PulmonaryPatientExams pulmonaryPatientExams(Long id){
+        Optional<PatientsEntity> patientsEntity = patientsRepository.findById(id);
+        if(patientsEntity.isEmpty()){
+            throw new RuntimeException("patient does not exist");
+        }
+
+        return new PulmonaryPatientExams(patientsEntity.get());
+    }
+
+    public PatientExams allPatientExams(Long id){
+        Optional<PatientsEntity> patientsEntity = patientsRepository.findById(id);
+        if(patientsEntity.isEmpty()){
+            throw new RuntimeException("patient does not exist");
+        }
+
+        return new PatientExams(patientsEntity.get());
+    }
 }

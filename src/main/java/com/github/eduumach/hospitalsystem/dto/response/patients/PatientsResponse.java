@@ -1,6 +1,8 @@
-package com.github.eduumach.hospitalsystem.dto.response;
+package com.github.eduumach.hospitalsystem.dto.response.patients;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 import com.github.eduumach.hospitalsystem.entity.PulmonaryIndexEntity;
@@ -8,12 +10,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PatientsResponse {
 
     private Long id;
@@ -21,7 +25,8 @@ public class PatientsResponse {
     private Long age;
     private String cpf;
     private String rg;
-    private String dateOfBirth;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dateOfBirth;
     private String sex;
     private String sign;
     private String mother;

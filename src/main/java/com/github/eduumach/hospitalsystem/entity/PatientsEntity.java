@@ -1,10 +1,12 @@
 package com.github.eduumach.hospitalsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -24,7 +26,8 @@ public class PatientsEntity {
     private Long age;
     private String cpf;
     private String rg;
-    private String dateOfBirth;
+    @Column(name = "local_date")
+    private LocalDate dateOfBirth;
     private String sex;
     private String sign;
     private String mother;

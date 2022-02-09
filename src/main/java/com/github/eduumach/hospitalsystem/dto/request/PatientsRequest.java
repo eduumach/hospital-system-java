@@ -1,9 +1,12 @@
 package com.github.eduumach.hospitalsystem.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +17,8 @@ public class PatientsRequest {
     private Long age;
     private String cpf;
     private String rg;
-    private String dateOfBirth;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dateOfBirth;
     private String sex;
     private String sign;
     private String mother;
