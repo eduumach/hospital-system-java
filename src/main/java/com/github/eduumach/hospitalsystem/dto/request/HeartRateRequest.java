@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 public class HeartRateRequest {
 
     private String cpf;
-    private int epoch;
+    private Long epoch;
     private double heartRate;
 
     public HeartRateEntity requestObject(){

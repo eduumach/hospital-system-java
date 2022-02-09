@@ -12,7 +12,7 @@ public class HeartRateResponse {
 
     private Long id;
     private String cpf;
-    private int epoch;
+    private Long epoch;
     private double heartRate;
 
     public void createResponse(HeartRateEntity heartRateEntity){

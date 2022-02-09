@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class PulmonaryIndexRequest {
 
     private String cpf;
-    private int epoch;
+    private Long epoch;
     private double pulmonaryIndex;
 
     public PulmonaryIndexEntity requestObject(){

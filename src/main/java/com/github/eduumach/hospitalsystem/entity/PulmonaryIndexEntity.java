@@ -27,7 +27,7 @@ public class PulmonaryIndexEntity {
     @JoinColumn(name = "patient_id", nullable = false)
     private PatientsEntity patientsEntity;
 
-    private int epoch;
+    private Long epoch;
     private double pulmonaryIndex;
 
 }

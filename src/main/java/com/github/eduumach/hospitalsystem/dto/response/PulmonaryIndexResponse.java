@@ -12,7 +12,7 @@ public class PulmonaryIndexResponse {
 
     private Long id;
     private String cpf;
-    private int epoch;
+    private Long epoch;
     private double pulmonaryIndex;
 
     public void createResponse(PulmonaryIndexEntity pulmonaryIndexEntity){
