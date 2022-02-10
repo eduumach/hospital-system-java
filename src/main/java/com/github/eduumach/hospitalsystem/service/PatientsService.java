@@ -1,15 +1,20 @@
 package com.github.eduumach.hospitalsystem.service;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.eduumach.hospitalsystem.dto.response.patients.PatientsResponse;
 import com.github.eduumach.hospitalsystem.dto.response.patients.*;
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 import com.github.eduumach.hospitalsystem.repository.PatientsRepository;
 import com.github.eduumach.hospitalsystem.dto.request.PatientsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -131,5 +136,43 @@ public class PatientsService {
         }
 
         return new PatientExams(patientsEntity.get());
+    }
+
+    public List<ImportantPatientsDataResponse> getPatientsName(String name){
+        return ImportantPatientsDataResponse.convert(patientsRepository.findByNameContainingIgnoreCase(name));
+    }
+
+    public List<ImportantPatientsDataResponse> teste(Map<String, String> map){
+        Example<PatientsEntity> patientsEntityExample = Example.of(getMap(map));
+        return ImportantPatientsDataResponse.convert(patientsRepository.findAll(patientsEntityExample));
+    }
+
+    private PatientsEntity getMap(Map<String, String> map){
+        PatientsEntity patientsEntity = new PatientsEntity();
+        //patientsEntity.setId(Long.valueOf(map.get("id")));
+        patientsEntity.setCpf(map.get("cpf"));
+        patientsEntity.setName(map.get("name"));
+        //patientsEntity.setAge(Long.valueOf(map.get("age")));
+        patientsEntity.setRg(map.get("rg"));
+        //patientsEntity.setDateOfBirth(LocalDate.parse(map.get("dateOfBirth")));
+        patientsEntity.setSex(map.get("sex"));
+        patientsEntity.setSign(map.get("sign"));
+        patientsEntity.setMother(map.get("mother"));
+        patientsEntity.setFather(map.get("father"));
+        patientsEntity.setEmail(map.get("email"));
+        //patientsEntity.setPassword(map.get("password"));
+        patientsEntity.setZipCode(map.get("zipCode"));
+        patientsEntity.setAddress(map.get("address"));
+        //patientsEntity.setNumber(Long.valueOf(map.get("number")));
+        patientsEntity.setNeighborhood(map.get("neighborhood"));
+        patientsEntity.setCity(map.get("city"));
+        patientsEntity.setState(map.get("state"));
+        patientsEntity.setLandline(map.get("landline"));
+        patientsEntity.setPhoneNumber(map.get("phoneNumber"));
+        patientsEntity.setHeight(map.get("height"));
+        //patientsEntity.setWeight(Long.valueOf(map.get("weight")));
+        patientsEntity.setBloodType(map.get("bloodType"));
+        patientsEntity.setColor(map.get("color"));
+        return patientsEntity;
     }
 }

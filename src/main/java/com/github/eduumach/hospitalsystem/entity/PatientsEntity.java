@@ -26,7 +26,6 @@ public class PatientsEntity {
     private Long age;
     private String cpf;
     private String rg;
-    @Column(name = "local_date")
     private LocalDate dateOfBirth;
     private String sex;
     private String sign;

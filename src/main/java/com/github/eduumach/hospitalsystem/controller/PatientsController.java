@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -19,9 +20,12 @@ public class PatientsController {
     @Autowired
     PatientsService patientsService;
 
-    @GetMapping("/")
-    public List<ImportantPatientsDataResponse> getPatients(){
-        return patientsService.getPatients();
+    @GetMapping()
+    public List<ImportantPatientsDataResponse> getPatients(@RequestParam (required = false)String name){
+        if(name == null){
+            return patientsService.getPatients();
+        }
+        return patientsService.getPatientsName(name);
     }
 
     @GetMapping("/{id}")
@@ -46,7 +50,7 @@ public class PatientsController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<PatientsResponse> createPatient(@RequestBody PatientsRequest patientsRequest){
         PatientsResponse patientsResponse = patientsService.createPatient(patientsRequest);
         return new ResponseEntity<>(patientsResponse, HttpStatus.OK);
@@ -64,4 +68,8 @@ public class PatientsController {
         return new ResponseEntity<>(patientsResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/teste")
+    public List<ImportantPatientsDataResponse> teste(@RequestParam(required = false) Map<String, String> characteristics){
+        return  patientsService.teste(characteristics);
+    }
 }

@@ -2,6 +2,7 @@ package com.github.eduumach.hospitalsystem.service;
 
 import com.github.eduumach.hospitalsystem.dto.response.patients.ExamByDate;
 import com.github.eduumach.hospitalsystem.entity.HeartRateEntity;
+import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
 import com.github.eduumach.hospitalsystem.entity.PulmonaryIndexEntity;
 import com.github.eduumach.hospitalsystem.repository.HeartRateRepository;
 import com.github.eduumach.hospitalsystem.repository.PulmonaryIndexRepository;
