@@ -26,9 +26,9 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> cpfAlreadyRegistered(DataConflict e, HttpServletRequest request){
         StandardError err = new StandardError();
         err.setTitle("Data conflict");
-        err.setStatus(HttpStatus.BAD_REQUEST.value());
+        err.setStatus(HttpStatus.CONFLICT.value());
         err.setDetail(e.getMessage());
         err.setType(request.getRequestURI());
-        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(err, HttpStatus.CONFLICT);
     }
 }
