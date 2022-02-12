@@ -20,12 +20,34 @@ public class PatientExams{
     private List<HeartRateEntity> heartRates;
     private List<PulmonaryIndexEntity> pulmonaryIndex;
 
-    public PatientExams(PatientsEntity patientsEntity) {
-        this.id = patientsEntity.getId();
-        this.name = patientsEntity.getName();
-        this.cpf = patientsEntity.getCpf();
-        this.email = patientsEntity.getEmail();
-        this.heartRates = patientsEntity.getHeartRates();
-        this.pulmonaryIndex = patientsEntity.getPulmonaryIndex();
+    public static PatientExams patientExamHeart(PatientsEntity patientsEntity){
+        PatientExams patientExams = new PatientExams();
+        patientExams.setId(patientsEntity.getId());
+        patientExams.setName(patientsEntity.getName());
+        patientExams.setCpf(patientsEntity.getCpf());
+        patientExams.setEmail(patientsEntity.getEmail());
+        patientExams.setHeartRates(patientsEntity.getHeartRates());
+        return patientExams;
+    }
+
+    public static PatientExams patientExamPulmonary(PatientsEntity patientsEntity){
+        PatientExams patientExams = new PatientExams();
+        patientExams.setId(patientsEntity.getId());
+        patientExams.setName(patientsEntity.getName());
+        patientExams.setCpf(patientsEntity.getCpf());
+        patientExams.setEmail(patientsEntity.getEmail());
+        patientExams.setPulmonaryIndex(patientsEntity.getPulmonaryIndex());
+        return patientExams;
+    }
+
+    public static PatientExams patientExams(PatientsEntity patientsEntity){
+        PatientExams patientExams = new PatientExams();
+        patientExams.setId(patientsEntity.getId());
+        patientExams.setName(patientsEntity.getName());
+        patientExams.setCpf(patientsEntity.getCpf());
+        patientExams.setEmail(patientsEntity.getEmail());
+        patientExams.setHeartRates(patientsEntity.getHeartRates());
+        patientExams.setPulmonaryIndex(patientsEntity.getPulmonaryIndex());
+        return patientExams;
     }
 }

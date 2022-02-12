@@ -1,20 +1,25 @@
 package com.github.eduumach.hospitalsystem.service;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.github.eduumach.hospitalsystem.dto.response.HeartRateResponse;
+import com.github.eduumach.hospitalsystem.dto.response.PulmonaryIndexResponse;
 import com.github.eduumach.hospitalsystem.dto.response.patients.PatientsResponse;
 import com.github.eduumach.hospitalsystem.dto.response.patients.*;
 import com.github.eduumach.hospitalsystem.entity.PatientsEntity;
+import com.github.eduumach.hospitalsystem.repository.HeartRateRepository;
 import com.github.eduumach.hospitalsystem.repository.PatientsRepository;
 import com.github.eduumach.hospitalsystem.dto.request.PatientsRequest;
+import com.github.eduumach.hospitalsystem.repository.PulmonaryIndexRepository;
+import com.github.eduumach.hospitalsystem.service.exceptions.DataConflict;
+import com.github.eduumach.hospitalsystem.service.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.time.LocalDate;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -23,10 +28,16 @@ public class PatientsService {
     @Autowired
     PatientsRepository patientsRepository;
 
+    @Autowired
+    HeartRateRepository heartRateRepository;
+
+    @Autowired
+    PulmonaryIndexRepository pulmonaryIndexRepository;
+
     public PatientsResponse createPatient(PatientsRequest patientsRequest){
 
         if(patientsRepository.existsByCpf(patientsRequest.getCpf())){
-            throw new RuntimeException("cpf already exists");
+            throw new DataConflict("cpf " + patientsRequest.getCpf() + " already registered ");
         }
 
         PatientsEntity patientsEntity = patientsRequest.requestObject();
@@ -39,15 +50,10 @@ public class PatientsService {
     }
 
     public PatientsResponse getPatient(Long id){
-
-        if(!patientsRepository.existsById(id)){
-            throw new RuntimeException("patient does not exist");
-        }
-
-        Optional<PatientsEntity> patientsEntity = patientsRepository.findById(id);
-
+        PatientsEntity patientsEntity = patientsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Id not found " + id));
         PatientsResponse patientsResponse = new PatientsResponse();
-        patientsResponse.createResponse(patientsEntity.get());
+        patientsResponse.createResponse(patientsEntity);
         return patientsResponse;
     }
 
@@ -58,8 +64,8 @@ public class PatientsService {
     public PatientsResponse putPatient(PatientsRequest patientsRequest, Long id){
         Optional<PatientsEntity> patientsEntityOptional = patientsRepository.findById(id);
 
-        if(!patientsEntityOptional.isPresent()){
-            throw new RuntimeException("patient does not exist");
+        if(patientsEntityOptional.isEmpty()){
+            throw new EntityNotFoundException("Id not found " + id);
         }
 
         PatientsEntity patientsEntity = patientsRequest.requestObject();
@@ -74,8 +80,8 @@ public class PatientsService {
     public PatientsResponse patchPatient(Long id, PatientsRequest patientsRequest){
         Optional<PatientsEntity> patientsEntityOptional = patientsRepository.findById(id);
 
-        if(!patientsEntityOptional.isPresent()){
-            throw new RuntimeException("patient does not exist");
+        if(patientsEntityOptional.isEmpty()){
+            throw new EntityNotFoundException("Id not found " + id);
         }
         PatientsEntity patientsEntitiRequest = patientsRequest.requestObject();
         PatientsEntity patientsEntity = patientsEntityOptional.get();
@@ -111,68 +117,92 @@ public class PatientsService {
         return patientsResponse;
     }
 
-    public HeartPatientExams heartPatientExams(Long id){
-        Optional<PatientsEntity> patientsEntityOptional = patientsRepository.findById(id);
-        if(patientsEntityOptional.isEmpty()){
-            throw new RuntimeException("patient does not exist");
+    public PatientExams patientExams(Long id, String type){
+        PatientsEntity patientsEntity = patientsRepository.findById(id).orElseThrow(()
+                -> new EntityNotFoundException("Id not found " + id));
+        if(type == null){
+            return PatientExams.patientExams(patientsEntity);
+        }else if(Objects.equals(type, "heart")){
+            return PatientExams.patientExamHeart(patientsEntity);
+        }else if(Objects.equals(type, "pulmonary")){
+            return PatientExams.patientExamPulmonary(patientsEntity);
+        } else {
+            throw  new EntityNotFoundException("parameter not found");
         }
-
-        return new HeartPatientExams(patientsEntityOptional.get());
-    }
-
-    public PulmonaryPatientExams pulmonaryPatientExams(Long id){
-        Optional<PatientsEntity> patientsEntity = patientsRepository.findById(id);
-        if(patientsEntity.isEmpty()){
-            throw new RuntimeException("patient does not exist");
-        }
-
-        return new PulmonaryPatientExams(patientsEntity.get());
-    }
-
-    public PatientExams allPatientExams(Long id){
-        Optional<PatientsEntity> patientsEntity = patientsRepository.findById(id);
-        if(patientsEntity.isEmpty()){
-            throw new RuntimeException("patient does not exist");
-        }
-
-        return new PatientExams(patientsEntity.get());
     }
 
     public List<ImportantPatientsDataResponse> getPatientsName(String name){
         return ImportantPatientsDataResponse.convert(patientsRepository.findByNameContainingIgnoreCase(name));
     }
 
-    public List<ImportantPatientsDataResponse> teste(Map<String, String> map){
-        Example<PatientsEntity> patientsEntityExample = Example.of(getMap(map));
+    public List<ImportantPatientsDataResponse> getPatientCharacteristics(Map<String, String> map){
+        PatientsEntity patientsEntity = getMap(map);
+        if(map.get("age") != null){
+            return ImportantPatientsDataResponse.convert(patientsRepository.findByAge(Long.valueOf(map.get("age"))));
+        }
+        if(map.get("weight") != null){
+            return ImportantPatientsDataResponse.convert(patientsRepository.findByWeight(Long.valueOf(map.get("weight"))));
+        }
+        ExampleMatcher matcher = ExampleMatcher.matchingAll()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase();
+        Example<PatientsEntity> patientsEntityExample = Example.of(getMap(map), matcher);
         return ImportantPatientsDataResponse.convert(patientsRepository.findAll(patientsEntityExample));
     }
 
     private PatientsEntity getMap(Map<String, String> map){
         PatientsEntity patientsEntity = new PatientsEntity();
-        //patientsEntity.setId(Long.valueOf(map.get("id")));
         patientsEntity.setCpf(map.get("cpf"));
         patientsEntity.setName(map.get("name"));
-        //patientsEntity.setAge(Long.valueOf(map.get("age")));
         patientsEntity.setRg(map.get("rg"));
-        //patientsEntity.setDateOfBirth(LocalDate.parse(map.get("dateOfBirth")));
         patientsEntity.setSex(map.get("sex"));
         patientsEntity.setSign(map.get("sign"));
         patientsEntity.setMother(map.get("mother"));
         patientsEntity.setFather(map.get("father"));
         patientsEntity.setEmail(map.get("email"));
-        //patientsEntity.setPassword(map.get("password"));
         patientsEntity.setZipCode(map.get("zipCode"));
         patientsEntity.setAddress(map.get("address"));
-        //patientsEntity.setNumber(Long.valueOf(map.get("number")));
         patientsEntity.setNeighborhood(map.get("neighborhood"));
         patientsEntity.setCity(map.get("city"));
         patientsEntity.setState(map.get("state"));
         patientsEntity.setLandline(map.get("landline"));
         patientsEntity.setPhoneNumber(map.get("phoneNumber"));
         patientsEntity.setHeight(map.get("height"));
-        //patientsEntity.setWeight(Long.valueOf(map.get("weight")));
         patientsEntity.setBloodType(map.get("bloodType"));
         patientsEntity.setColor(map.get("color"));
         return patientsEntity;
+    }
+
+    public ExamByDate examByDate(String day, String month, String year) {
+        long epoch, epochEnd;
+        try {
+            if(day == null && month == null){
+                day = "1";
+                month = "1";
+
+                epoch = new java.text.SimpleDateFormat("dd/MM/yyyy").parse(day + "/"
+                        + month + "/" + year).getTime() / 1000;
+                epochEnd = new java.text.SimpleDateFormat("dd/MM/yyyy").parse(day + "/"
+                        + month + 1 + "/" + year).getTime() / 1000;
+
+            }else if(day == null){
+                day = "1";
+                epoch = new java.text.SimpleDateFormat("dd/MM/yyyy").parse(day + "/"
+                        + month + "/" + year).getTime() / 1000;
+                epochEnd = new java.text.SimpleDateFormat("dd/MM/yyyy").parse(day + "/"
+                        + month + 1 + "/" + year).getTime() / 1000;
+            }else {
+                epoch = new java.text.SimpleDateFormat("dd/MM/yyyy").parse(day + "/"
+                        + month + "/" + year).getTime() / 1000;
+                epochEnd = new java.text.SimpleDateFormat("dd/MM/yyyy").parse(day+1 + "/"
+                        + month + "/" + year).getTime() / 1000;
+            }
+        } catch (ParseException e) {
+            throw new EntityNotFoundException("Date does not exist or is incorrect.");
+        }
+        List<HeartRateResponse> heartRateEntities = HeartRateResponse.convert(heartRateRepository
+                .findByEpochBetween(epoch, epochEnd));
+        List<PulmonaryIndexResponse> pulmonaryIndexEntities = PulmonaryIndexResponse
+                .convert(pulmonaryIndexRepository.findByEpochBetween(epoch, epochEnd));
+        return new ExamByDate(heartRateEntities, pulmonaryIndexEntities);
     }
 }

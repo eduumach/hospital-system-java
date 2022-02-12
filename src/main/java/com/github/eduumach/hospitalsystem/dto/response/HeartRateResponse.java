@@ -5,20 +5,34 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class HeartRateResponse {
 
     private Long id;
-    private String cpf;
+    private Long patientId;
     private Long epoch;
     private double heartRate;
 
     public void createResponse(HeartRateEntity heartRateEntity){
         this.id = heartRateEntity.getId();
-        this.cpf = heartRateEntity.getPatientsEntity().getCpf();
+        this.patientId = heartRateEntity.getPatientsEntity().getId();
         this.epoch = heartRateEntity.getEpoch();
         this.heartRate = heartRateEntity.getHeartRate();
+    }
+
+    public HeartRateResponse(HeartRateEntity heartRateEntity){
+        this.id = heartRateEntity.getId();
+        this.patientId = heartRateEntity.getPatientsEntity().getId();
+        this.epoch = heartRateEntity.getEpoch();
+        this.heartRate = heartRateEntity.getHeartRate();
+    }
+
+    public static List<HeartRateResponse> convert(List<HeartRateEntity> heartRateEntities){
+        return heartRateEntities.stream().map(HeartRateResponse::new).collect(Collectors.toList());
     }
 }

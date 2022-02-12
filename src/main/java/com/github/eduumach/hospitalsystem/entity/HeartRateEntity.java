@@ -1,10 +1,8 @@
 package com.github.eduumach.hospitalsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -20,14 +18,18 @@ public class HeartRateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Long id;
 
     @JsonBackReference
     @ManyToOne()
     @JoinColumn(name = "patient_id", nullable = false)
+    @NotNull
     private PatientsEntity patientsEntity;
 
+    @NotNull
     private Long epoch;
+    @NotNull
     private double heartRate;
 
 }

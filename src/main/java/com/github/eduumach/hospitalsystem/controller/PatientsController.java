@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/patients")
@@ -21,11 +20,18 @@ public class PatientsController {
     PatientsService patientsService;
 
     @GetMapping()
-    public List<ImportantPatientsDataResponse> getPatients(@RequestParam (required = false)String name){
-        if(name == null){
-            return patientsService.getPatients();
+    public ResponseEntity<List<ImportantPatientsDataResponse>> getPatients(
+            @RequestParam(required = false) Map<String, String> map){
+        if(map.isEmpty()){
+           return new ResponseEntity<>(patientsService.getPatients(), HttpStatus.OK);
         }
-        return patientsService.getPatientsName(name);
+        if((map.get("name") != null && map.size() >= 2) || map.size() >= 2){
+            return  new ResponseEntity<>(patientsService.getPatientCharacteristics(map), HttpStatus.OK);
+        }
+        if(map.get("name") != null){
+            return new ResponseEntity<>(patientsService.getPatientsName(map.get("name")), HttpStatus.OK);
+        }
+        return  new ResponseEntity<>(patientsService.getPatientCharacteristics(map), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -34,20 +40,17 @@ public class PatientsController {
         return new ResponseEntity<>(patientsResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/exams")
-    public ResponseEntity<Object> getExams(@RequestParam(name = "type", required = false) String type, @PathVariable Long id) {
-        if(id != null && type == null){
-            PatientExams patientExams = patientsService.allPatientExams(id);
-            return new ResponseEntity<>(patientExams, HttpStatus.OK);
-        }else if(Objects.equals(type, "heart")){
-            HeartPatientExams heartPatientExams = patientsService.heartPatientExams(id);
-            return new ResponseEntity<>(heartPatientExams, HttpStatus.OK);
-        }else if(Objects.equals(type, "pulmonary")){
-            PulmonaryPatientExams pulmonaryPatientExams = patientsService.pulmonaryPatientExams(id);
-            return new ResponseEntity<>(pulmonaryPatientExams, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/exams")
+    public ExamByDate getExamsDate(@RequestParam(required = false) String day,
+                                   @RequestParam(required = false) String month,
+                                   @RequestParam(required = false) String year) {
+        return patientsService.examByDate(day,month,year);
+    }
+
+    @GetMapping("/exams/{id}")
+    public ResponseEntity<Object> getExams(@PathVariable Long id, @RequestParam(required = false) String type) {
+        PatientExams patientExams = patientsService.patientExams(id, type);
+        return new ResponseEntity<>(patientExams, HttpStatus.OK);
     }
 
     @PostMapping()
@@ -66,10 +69,5 @@ public class PatientsController {
     public ResponseEntity<PatientsResponse> patchPatient(@PathVariable Long id, @RequestBody PatientsRequest patientsRequest){
         PatientsResponse patientsResponse = patientsService.patchPatient(id, patientsRequest);
         return new ResponseEntity<>(patientsResponse, HttpStatus.OK);
-    }
-
-    @GetMapping("/teste")
-    public List<ImportantPatientsDataResponse> teste(@RequestParam(required = false) Map<String, String> characteristics){
-        return  patientsService.teste(characteristics);
     }
 }

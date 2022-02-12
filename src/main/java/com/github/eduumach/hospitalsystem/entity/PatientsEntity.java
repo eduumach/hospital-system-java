@@ -1,7 +1,7 @@
 package com.github.eduumach.hospitalsystem.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -20,10 +20,14 @@ public class PatientsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Long id;
 
+    @NotNull
     private String name;
     private Long age;
+    @NotNull
+    @Column(name = "cpf", unique = true)
     private String cpf;
     private String rg;
     private LocalDate dateOfBirth;
@@ -31,7 +35,9 @@ public class PatientsEntity {
     private String sign;
     private String mother;
     private String father;
+    @NotNull
     private String email;
+    @NotNull
     private String password;
     private String zipCode;
     private String address;

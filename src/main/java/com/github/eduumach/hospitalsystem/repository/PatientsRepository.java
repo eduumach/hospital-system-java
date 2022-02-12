@@ -11,4 +11,6 @@ public interface PatientsRepository extends JpaRepository<PatientsEntity, Long> 
     boolean existsByCpf(String cpf);
     PatientsEntity findByCpf(String cpf);
     List<PatientsEntity> findByNameContainingIgnoreCase(String name);
+    List<PatientsEntity> findByWeight(Long weight);
+    List<PatientsEntity> findByAge(Long age);
 }
