@@ -25,6 +25,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+          cache: maven
 
       - name: Maven compile
         run: mvn clean compile
