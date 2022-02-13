@@ -27,14 +27,14 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
-        - name: Maven compile
-          run: mvn clean compile
+      - name: Maven compile
+        run: mvn clean compile
 
-        - name: Maven run Spring Boot
-          run: mvn spring-boot:run
+      - name: Maven run Spring Boot
+        run: mvn spring-boot:run
 
-        - name: Test Collection
-        - uses: actions/checkout@master
-        - uses: matt-ball/newman-action@master
-          with:
-            collection: collection.json
+      - name: Test Collection
+      - uses: actions/checkout@master
+      - uses: matt-ball/newman-action@master
+        with:
+          collection: collection.json
