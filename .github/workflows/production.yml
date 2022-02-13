@@ -33,8 +33,3 @@ jobs:
       - name: Maven run Spring Boot
         run: mvn spring-boot:run
 
-      - name: Test Collection
-      - uses: actions/checkout@master
-      - uses: matt-ball/newman-action@master
-        with:
-          collection: collection.json
