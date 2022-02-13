@@ -1,0 +1,458 @@
+{
+	"info": {
+		"_postman_id": "9ff81647-936c-4c8c-9ca6-323af2b176ff",
+		"name": "Hospital System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "patients",
+			"item": [
+				{
+					"name": "patients",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jão\",\n    \"age\": 18,\n    \"cpf\": \"999.999.999-99\",\n    \"rg\": \"22.107.246-9\",\n    \"dateOfBirth\": \"16/04/2004\",\n    \"sex\": \"Masculino\",\n    \"sign\": \"Capricórnio\",\n    \"mother\": \"Beatriz Alícia\",\n    \"father\": \"Nelson Heitor Costa\",\n    \"email\": \"jao@gmail.com\",\n    \"password\": \"6eXIFok6iQ\",\n    \"zipCode\": \"69309-415\",\n    \"address\": \"Rua das Palmas de Santa Rita\",\n    \"number\": 765,\n    \"neighborhood\": \"Pricumã\",\n    \"city\": \"Boa Vista\",\n    \"state\": \"RR\",\n    \"landline\": \"(95) 3783-9661\",\n    \"phoneNumber\": \"(95) 99359-1588\",\n    \"height\": \"1,96\",\n    \"weight\": 63,\n    \"bloodType\": \"A-\",\n    \"color\": \"laranja\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/patients/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patients",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mateus\",\n    \"age\": 55,\n    \"cpf\": \"999.999.999-99\",\n    \"rg\": \"22.107.246-9\",\n    \"dateOfBirth\": \"19\\/01\\/1967\",\n    \"sex\": \"Masculino\",\n    \"sign\": \"Capricórnio\",\n    \"mother\": \"Beatriz Alícia\",\n    \"father\": \"Nelson Heitor Costa\",\n    \"email\": \"aalexandrecalebcosta@br.loreal.com\",\n    \"password\": \"6eXIFok6iQ\",\n    \"zipCode\": \"69309-415\",\n    \"address\": \"Rua das Palmas de Santa Rita\",\n    \"number\": 765,\n    \"neighborhood\": \"Pricumã\",\n    \"city\": \"Boa Vista\",\n    \"state\": \"RR\",\n    \"landline\": \"(95) 3783-9661\",\n    \"phoneNumber\": \"(95) 99359-1588\",\n    \"height\": \"1,96\",\n    \"weight\": 63,\n    \"bloodType\": \"A-\",\n    \"color\": \"laranja\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/patients/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patients",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Eduardo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/patients/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/patients",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/patients/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by characteristics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/patients?sign=Capricórnio",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Eduardo",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "55",
+									"disabled": true
+								},
+								{
+									"key": "cpf",
+									"value": "999.999.999-99",
+									"disabled": true
+								},
+								{
+									"key": "rg",
+									"value": "22.107.246-9",
+									"disabled": true
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "19\\/01\\/1967",
+									"disabled": true
+								},
+								{
+									"key": "sex",
+									"value": "Masculino",
+									"disabled": true
+								},
+								{
+									"key": "sign",
+									"value": "Capricórnio"
+								},
+								{
+									"key": "mother",
+									"value": "Beatriz Alícia",
+									"disabled": true
+								},
+								{
+									"key": "father",
+									"value": "Nelson Heitor Costa",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "aalexandrecalebcosta@br.loreal.com",
+									"disabled": true
+								},
+								{
+									"key": "zipCode",
+									"value": "69309-415",
+									"disabled": true
+								},
+								{
+									"key": "address",
+									"value": "Rua das Palmas de Santa Rita",
+									"disabled": true
+								},
+								{
+									"key": "neighborhood",
+									"value": "Pricumã",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Boa Vista",
+									"disabled": true
+								},
+								{
+									"key": "state",
+									"value": "RR",
+									"disabled": true
+								},
+								{
+									"key": "landline",
+									"value": "(95) 3783-9661",
+									"disabled": true
+								},
+								{
+									"key": "phoneNumber",
+									"value": "(95) 99359-1588",
+									"disabled": true
+								},
+								{
+									"key": "height",
+									"value": "1,96",
+									"disabled": true
+								},
+								{
+									"key": "bloodType",
+									"value": "A-",
+									"disabled": true
+								},
+								{
+									"key": "color",
+									"value": "laranja",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by age or weight",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/patients?age=55",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients"
+							],
+							"query": [
+								{
+									"key": "age",
+									"value": "55"
+								},
+								{
+									"key": "weight",
+									"value": "63",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/patients?name=Eduardo",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Eduardo"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "heart-rate",
+			"item": [
+				{
+					"name": "cria indice cardiaco",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\" : \"999.999.999-99\",\n    \"epoch\": 1622560176,\n    \"heartRate\" : 0.715997\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/heart-rate/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"heart-rate",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pulmonary-index",
+			"item": [
+				{
+					"name": "cria indice pulmonar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\" : \"999.999.999-99\",\n    \"epoch\": 1622563699,\n    \"pulmonaryIndex\" : 0.715997\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/pulmonary-index/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"pulmonary-index",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exmas",
+			"item": [
+				{
+					"name": "by type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/patients/exams/1?type=heart",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients",
+								"exams",
+								"1"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "heart"
+								},
+								{
+									"key": "type",
+									"value": "pulmonary",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/patients/exams/?day=1&month=6&year=2021",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"patients",
+								"exams",
+								""
+							],
+							"query": [
+								{
+									"key": "day",
+									"value": "1"
+								},
+								{
+									"key": "month",
+									"value": "6"
+								},
+								{
+									"key": "year",
+									"value": "2021"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://hospital-system-eduumach.herokuapp.com",
+			"type": "string"
+		}
+	]
+}
