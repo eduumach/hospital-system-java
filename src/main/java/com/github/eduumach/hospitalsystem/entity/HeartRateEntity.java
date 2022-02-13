@@ -1,54 +1,35 @@
 package com.github.eduumach.hospitalsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
+import lombok.*;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "heartRate")
 public class HeartRateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Long id;
 
+    @JsonBackReference
     @ManyToOne()
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_id", nullable = false)
+    @NotNull
     private PatientsEntity patientsEntity;
 
-    private int epoc;
-    private double haeartRate;
+    @NotNull
+    private Long epoch;
+    @NotNull
+    private double heartRate;
 
-    public HeartRateEntity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public PatientsEntity getPatientsEntity() {
-        return patientsEntity;
-    }
-
-    public void setPatientsEntity(PatientsEntity patientsEntity) {
-        this.patientsEntity = patientsEntity;
-    }
-
-    public int getEpoc() {
-        return epoc;
-    }
-
-    public void setEpoc(int epoc) {
-        this.epoc = epoc;
-    }
-
-    public double getHaeartRate() {
-        return haeartRate;
-    }
-
-    public void setHaeartRate(double haeartRate) {
-        this.haeartRate = haeartRate;
-    }
 }

@@ -1,54 +1,38 @@
 package com.github.eduumach.hospitalsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "pulmonaryIndex")
 public class PulmonaryIndexEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Long id;
 
+    @JsonBackReference
     @ManyToOne()
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_id", nullable = false)
+    @NotNull
     private PatientsEntity patientsEntity;
 
-    private int epoc;
-    private int pulmonaryIndex;
+    @NotNull
+    private Long epoch;
+    @NotNull
+    private double pulmonaryIndex;
 
-    public PulmonaryIndexEntity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public PatientsEntity getPatientsEntity() {
-        return patientsEntity;
-    }
-
-    public void setPatientsEntity(PatientsEntity patientsEntity) {
-        this.patientsEntity = patientsEntity;
-    }
-
-    public int getEpoc() {
-        return epoc;
-    }
-
-    public void setEpoc(int epoc) {
-        this.epoc = epoc;
-    }
-
-    public int getPulmonaryIndex() {
-        return pulmonaryIndex;
-    }
-
-    public void setPulmonaryIndex(int pulmonaryIndex) {
-        this.pulmonaryIndex = pulmonaryIndex;
-    }
 }
