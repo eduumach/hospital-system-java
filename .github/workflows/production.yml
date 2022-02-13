@@ -13,28 +13,9 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_USER: hospital-system
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: 12345678
         ports:
           - 5432:5432
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: maven
 
-      - name: Maven compile
-        run: mvn clean compile
-
-      - name: Maven run Spring Boot
-        run: mvn spring-boot:run
-
-      - name: Test Collection
-      - uses: actions/checkout@master
-      - uses: matt-ball/newman-action@master
-        with:
-          collection: collection.json
