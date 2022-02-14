@@ -36,3 +36,8 @@ jobs:
       - name: Maven run Spring Boot
         run: mvn spring-boot:run
 
+      - uses: akhileshns/heroku-deploy@v3.4.6
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_NAME_PROD}}
+          heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
