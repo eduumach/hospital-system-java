@@ -49,17 +49,17 @@ jobs:
           POSTGRES_DB: postgres
         ports:
           - 5432:5432
-      hospital-system:
-        image: eduardomachadorezende/hospital-system:latest
-        env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
-          SPRING_DATASOURCE_USERNAME: postgres
-          SPRING_DATASOURCE_PASSWORD: postgres
-          SPRING_JPA_HIBERNATE_DDL_AUTO: update
-        ports:
-          - 8080:8080
-        volumes:
-          - ./:/app
+    container:
+      image: eduardomachadorezende/hospital-system:latest
+      env:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+        SPRING_DATASOURCE_USERNAME: postgres
+        SPRING_DATASOURCE_PASSWORD: postgres
+        SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      ports:
+        - 8080:8080
+      volumes:
+        - ./:/app
     steps:
       - name: Checkout
         uses: actions/checkout@v1

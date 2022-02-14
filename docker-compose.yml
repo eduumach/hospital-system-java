@@ -1,7 +1,10 @@
 version: '3.8'
 services:
   hospital-system:
-    image: eduardomachadorezende/hospital-system:latest
+    build:
+      context: .
+    depends_on:
+      - postgres
     ports:
       - "8080:8080"
     environment:
@@ -11,6 +14,7 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     volumes:
       - ./:/app
+    command: ./mvnw spring-boot:run
 
   postgres:
     image: postgres:9.6
