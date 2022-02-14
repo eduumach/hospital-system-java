@@ -33,7 +33,7 @@ jobs:
       - name: Maven compile
         run: mvn clean compile
       - name: Upload JAR
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: artifact
           path: target/hospital-system-0.0.1-SNAPSHOT.jar
