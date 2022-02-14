@@ -7,11 +7,11 @@ on:
 
 jobs:
   build:
+    needs: [up-docker-hub]
     env:
       JAVA_PROFILES_ATIVE: dev
 
     runs-on: ubuntu-latest
-
     services:
       postgres:
         image: postgres
@@ -21,19 +21,21 @@ jobs:
           POSTGRES_DB: postgres
         ports:
           - 5432:5432
+      hospital-system:
+        image: ${{ secrets.DOCKER_HUB_USERNAME }}/hospital-system:latest
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+          SPRING_DATASOURCE_USERNAME: postgres
+          SPRING_DATASOURCE_PASSWORD: postgres
+          SPRING_JPA_HIBERNATE_DDL_AUTO: update
+        ports:
+          - "8080:8080"
+        volumes:
+          - ./:/app
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: maven
-      - name: Maven compile
-        run: mvn -B package -DskipTests --file pom.xml
-      - name: Run JAR
-        run: java -jar ./target/hospital-system-0.0.1-SNAPSHOT.jar
+      - name: Checkout
+        uses: actions/checkout@v1
 
       - name: Run API Tests
         id: run-newman
