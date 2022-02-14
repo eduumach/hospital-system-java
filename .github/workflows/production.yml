@@ -33,8 +33,10 @@ jobs:
       - name: Maven compile
         run: mvn clean compile
 
-      - name: Maven run Spring Boot
-        run: mvn spring-boot:run
+      uses: actions/upload-artifact@v2
+        with:
+          name: jar
+          path: target/hospital-system-0.0.1-SNAPSHOT.jar
 
       - name: Checkout
         uses: actions/checkout@v1
