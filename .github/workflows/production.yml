@@ -33,8 +33,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/hospital-system:latest
 
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }
 
   build:
     needs: [up-docker-hub]
