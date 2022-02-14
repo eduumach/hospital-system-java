@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "9ff81647-936c-4c8c-9ca6-323af2b176ff",
-		"name": "Hospital System",
+		"_postman_id": "e064ea92-06e8-412a-8e77-6c02e6d58790",
+		"name": "Hospital System Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -451,7 +451,7 @@
 	"variable": [
 		{
 			"key": "BASE_URL",
-			"value": "https://hospital-system-eduumach.herokuapp.com",
+			"value": "localhost:8080",
 			"type": "string"
 		}
 	]

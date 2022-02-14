@@ -7,34 +7,29 @@ on:
 
 jobs:
   build:
+    env:
+      JAVA_PROFILES_ATIVE: dev
+
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_USER: hospital-system
-          POSTGRES_PASSWORD: admin
-          POSTGRES_DB: 12345678
-        ports:
-          - 5432:5432
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Run Docker-Compouse
+        run: docker-compose up -d --build
+
+      - name: Run API Tests
+        id: run-newman
+        uses: anthonyvscode/newman-action@v1
         with:
-          java-version: '17'
-          distribution: 'adopt'
+          collection: collection.json
+          reporters: cli
 
-      - name: Maven compile
-        run: mvn clean compile
+      - name: Output summary to console
+        run: echo ${{ steps.run-newman.outputs.summary }}
 
-      - name: Maven run Spring Boot
-        run: mvn spring-boot:run
-
-      - name: Test Collection
-      - uses: actions/checkout@master
-      - uses: matt-ball/newman-action@master
-      with:
-        collection: collection.json
+      - uses: akhileshns/heroku-deploy@v3.4.6
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_NAME_PROD}}
+          heroku_email: ${{secrets.HEROKU_USER_EMAIL}}

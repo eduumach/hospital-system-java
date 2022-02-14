@@ -1,11 +1,27 @@
 version: '3.8'
 services:
+  hospital-system:
+    build:
+      context: .
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    volumes:
+      - ./:/app
+    command: ./mvnw spring-boot:run
+
   postgres:
     image: postgres:9.6
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=hospital-system
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
       - MAX_CONNECTIONS=300
