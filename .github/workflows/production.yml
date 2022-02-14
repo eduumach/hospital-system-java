@@ -31,15 +31,12 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Maven compile
-        run: mvn clean compile
+        run: mvn -B package -DskipTests --file pom.xml
       - name: Upload JAR
         uses: actions/upload-artifact@v2
         with:
           name: artifact
           path: target/hospital-system-0.0.1-SNAPSHOT.jar
-
-      - name: Checkout
-        uses: actions/checkout@v1
 
       - name: Run API Tests
         id: run-newman
