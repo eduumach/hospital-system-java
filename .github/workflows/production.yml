@@ -36,6 +36,19 @@ jobs:
       - name: Maven run Spring Boot
         run: mvn spring-boot:run
 
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Run API Tests
+        id: run-newman
+        uses: anthonyvscode/newman-action@v1
+        with:
+          collection: collection.json
+          reporters: cli
+
+      - name: Output summary to console
+        run: echo ${{ steps.run-newman.outputs.summary }}
+
       - uses: akhileshns/heroku-deploy@v3.4.6
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
