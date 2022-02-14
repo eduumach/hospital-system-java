@@ -28,7 +28,6 @@ public class PatientsResponse {
     private String mother;
     private String father;
     private String email;
-    private String password;
     private String zipCode;
     private String address;
     private Long number;
@@ -54,7 +53,6 @@ public class PatientsResponse {
         this.mother = patientsEntity.getMother();
         this.father = patientsEntity.getFather();
         this.email = patientsEntity.getEmail();
-        this.password = patientsEntity.getPassword();
         this.zipCode = patientsEntity.getZipCode();
         this.address = patientsEntity.getAddress();
         this.number = patientsEntity.getNumber();
