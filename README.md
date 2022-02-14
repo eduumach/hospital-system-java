@@ -32,28 +32,6 @@ To run the application with docker you need:
 docker-compose up
 ```
 
-## Upload data to database
-
-### Requirements
-To run the tests you will need:
-
-- [Python](https://www.python.org/downloads/)
-
-### Upload
-
-First you will have to download the data from the anlix-io repository and 
-paste the "dados" folder in post-data, now just run the commands:
-
-```bash
-cd post-data
-python -m venv venv
-source venv/bin/activate
-pip install pandas
-pip install requests
-python main.py
-```
-Now the entire database is in your database.
-
 ## Test with newman
 
 ### Requirements
@@ -69,3 +47,17 @@ To test, just run this command:
 ```bash
 newman run collection.json
 ```
+
+## Documentation
+
+For the documentation I used postaman, and I uploaded some data on heroku to facilitate testing for anyone using the api:
+
+- [Heroku](https://hospital-system-eduumach.herokuapp.com/)
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/13970793/UVeNkMfX)
+
+## Uploading the data
+
+To upload the data I used a python script:
+
+- [Uploading the data](post-data/README.md)
