@@ -50,7 +50,7 @@ jobs:
         ports:
           - 5432:5432
       hospital-system:
-        image: ${{ secrets.DOCKER_HUB_USERNAME }}/hospital-system:latest
+        image: ${{secrets.DOCKER_HUB_USERNAME}}/hospital-system:latest
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
           SPRING_DATASOURCE_USERNAME: postgres
